@@ -67,7 +67,8 @@ public class Piloto extends Thread{
 		String inMsg;
 		
 		//Controller driver = load(args[0]);//*/
-		Controller driver = new SimpleDriver();
+		//Controller driver = new SimpleDriver();
+		Controller driver = new JesusDriver();
 		driver.setStage(stage);
 		driver.setTrackName(trackName);
 		
