@@ -22,4 +22,10 @@ public class Sigmoide implements FuncionActivacion{
 		return y;
 	}
 
+	@Override
+	public double fderivada(double x) {
+		double y = funcion(x);
+		return y*(1-y);
+	}
+
 }

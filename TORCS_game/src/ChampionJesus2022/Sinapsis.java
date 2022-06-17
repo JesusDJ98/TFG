@@ -1,52 +1,23 @@
 package ChampionJesus2022;
 
 
-public class Sinapsis {// implements Cloneable{
+public class Sinapsis implements Cloneable{
 	
 	private double peso;
-	private Neurona destino;
+	private double delta;
 	
 	public Sinapsis() {
 		this.peso = Math.random();
-		this.destino = null;
+		this.delta = 0;
 	}
 	
-	public Sinapsis(Neurona d) {
-		this.peso = Math.random();
-		//this.destino = d;//Modifica todo
-		this.destino = new Neurona(d);	//Solo modifica su objeto
+	public Sinapsis(double p) {
+		this.peso = p;
+		this.delta = 0;
 	}
 	
-	//Esto creo que no necesario
-	public Sinapsis(Sinapsis s) {
-		this.peso = s.getPeso();
-		//this.destino = d;//Modifica todo
-		this.destino = new Neurona(s.getDestino());	//Solo modifica su objeto
-	}//*/
 	
 	
-	/*
-	@Override
-	public Object clone() {
-		Object clone = null;
-		try {
-			clone = super.clone();
-		}catch(Exception ex) {
-			System.out.println("Error cloando Neurona: "+ex);
-		}
-		((Sinapsis)clone).setPeso(this.peso);
-		((Sinapsis)clone).setDestino(new Neurona(this.destino));
-		
-		
-		return clone;
-	}//*/
-	
-	
-	
-	@Override
-	public String toString() {
-		return "Peso: " + this.peso + " - Neurona destino: "+ this.destino.getName();
-	}
 	
 	/*
 	 * GETTERS & SETTERS
@@ -60,14 +31,37 @@ public class Sinapsis {// implements Cloneable{
 		this.peso = peso;
 	}
 
-	public Neurona getDestino() {
-		return destino;
+	public double getDelta() {
+		return delta;
 	}
 
-	public void setDestino(Neurona destino) {
-		this.destino = destino;
+	public void setDelta(double delta) {
+		this.delta = delta;
 	}
+
 	
+	
+	@Override
+	public Object clone() {
+		//System.out.println("\t\t\tEntro en clone de Sinapsis");
+		Sinapsis clone = null;
+		try {
+			clone = (Sinapsis) super.clone();
+		}catch(Exception ex) {
+			System.out.println("Error clonando Sinapsis: "+ex);
+		}
+		
+		return clone;
+	}//*/
+	
+	
+	
+	@Override
+	public String toString() {
+		//String s = "Peso: "+this.peso;
+		String s = ""+this.peso;
+		return s;
+	}
 	
 
 }

@@ -5,7 +5,11 @@ package champ2011client;
 
 import java.util.ArrayList;
 
+import ChampionJesus2022.Capa;
+import ChampionJesus2022.FuncionActivacion;
 import ChampionJesus2022.Neurona;
+import ChampionJesus2022.RedNeuronal;
+import ChampionJesus2022.Sigmoide;
 import ChampionJesus2022.Sinapsis;
 
 /**
@@ -35,79 +39,100 @@ public class Client_Hilos {
 		//piloto2.start();
 		//*/
 		
+		
+		double factor_aprendizaje = 0.1;
+		FuncionActivacion FSigmoide = new Sigmoide();
+		//Disseño red
+		//Conexiones
+		Sinapsis e1o1 = new Sinapsis();	//Neurona Entrada 1 con Oculta
+		Sinapsis e1o2 = new Sinapsis();
+		Sinapsis e1o3 = new Sinapsis();
+		Sinapsis e2o1 = new Sinapsis();	//Neurona Entrada 2 con Oculta
+		Sinapsis e2o2 = new Sinapsis();
+		Sinapsis e2o3 = new Sinapsis();
+		Sinapsis o1s = new Sinapsis();	//Neurona Oculta 1 con Salida
+		Sinapsis o2s = new Sinapsis();	//Neurona Oculta 2 con Salida
+		Sinapsis o3s = new Sinapsis();	//Neurona Oculta 3 con Salida
+		Sinapsis ss = new Sinapsis();	//Salida de la Neurona de Salida... si necesaria
+		
+		
+		ArrayList<Sinapsis> se1 = new ArrayList<>();
+		se1.add(e1o1);se1.add(e1o2); se1.add(e1o3);
+		ArrayList<Sinapsis> se2 = new ArrayList<>();
+		se2.add(e2o1);se2.add(e2o2); se2.add(e2o3);
+		ArrayList<Sinapsis> so1 = new ArrayList<>();
+		so1.add(o1s);
+		ArrayList<Sinapsis> so2 = new ArrayList<>();
+		so2.add(o2s);
+		ArrayList<Sinapsis> so3 = new ArrayList<>();
+		so3.add(o3s);
+		ArrayList<Sinapsis> Sinap_s = new ArrayList<>();
+		Sinap_s.add(ss);
+		
 		//Generamos neuronas
-		Neurona n1 = new Neurona("Entrada 1");
-		Neurona n2 = new Neurona("Entrada 2");
-		Neurona s = new Neurona("Salida");
+		Neurona e1 = new Neurona("Entrada 1",se1);
+		Neurona e2 = new Neurona("Entrada 2",se2);
+		Neurona o1 = new Neurona("Oculta 1",so1);
+		Neurona o2 = new Neurona("Oculta 2",so2);
+		Neurona o3 = new Neurona("Oculta 3",so3);
+		Neurona s = new Neurona("Salida",Sinap_s);
+
 		
-		//Vemos las neuronas
-		System.out.println("Vemos las neuronas");
-		System.out.println(n1);
-		System.out.println(n2);
-		System.out.println(s);
+		
+		
+		
+		//Genero las capas
+		ArrayList<Neurona> capaE = new ArrayList<>();
+		capaE.add((Neurona)e1.clone());capaE.add(e2);
+		ArrayList<Neurona> capaE2 = new ArrayList<>();
+		capaE2.add(e1);capaE2.add(e2);
+		ArrayList<Neurona> capaO1 = new ArrayList<>();
+		capaO1.add(o1);capaO1.add(o2);capaO1.add(o3);
+		ArrayList<Neurona> capaS = new ArrayList<>();
+		capaS.add(s);
+		
+		
+		Capa CE = new Capa("Entrada", capaE);
+		//Capa CE2 = new Capa("Entrada", capaE);
+		//Capa CE3 = new Capa("Entrada", capaE2);
+		Capa CO1 = new Capa("Oculta1", capaO1);
+		Capa CS = new Capa("Salida",capaS);
+		ArrayList<Capa> perceptron = new ArrayList<>();
+		perceptron.add((Capa)CE.clone());
+		perceptron.add((Capa)CO1.clone());
+		perceptron.add((Capa)CS.clone());
+		/* Necesito esto porue sino deberia de hacer una copia en perceptron y no mola pues e sun arraylist...
+		perceptron.add(CE);
+		perceptron.add(CO1);
+		perceptron.add(CS);
+		// */
+		
+		RedNeuronal red1 = new RedNeuronal(perceptron, FSigmoide, factor_aprendizaje);
+		//RedNeuronal red2 = new RedNeuronal(perceptron, FSigmoide, factor_aprendizaje);	//HAy que pasarle una copia
+		RedNeuronal red2 = (RedNeuronal)red1.clone();
 		System.out.println(" ");
-		
-		//Generamos las conexiones
-		Sinapsis n1s = new Sinapsis(s);
-		Sinapsis n2s = new Sinapsis(s);
-		System.out.println("Vemos las sinapsis");
-		System.out.println(n1s);
-		System.out.println(n2s);
+		System.out.println("------------------ Redes ----------------------");
+		System.out.println(red1);
+		System.out.println("\n\tRed2");
+		System.out.println(red2);
+		red1.Modificar_PesoNeurona(1, 1, 0, 8);
+		red2.Modificar_PesoNeurona(0, 0, 0, 9);
+		o3s.setPeso(10);//Modifico una sinapsis	--> No afecta
 		System.out.println(" ");
+		System.out.println("----- CAMBIO -----");
+		System.out.println(red1);
+		System.out.println("\n\tRed2");
+		System.out.println(red2);
 		
-		ArrayList<Sinapsis> sn1 = new ArrayList<>();
-		sn1.add(n1s);
-		ArrayList<Sinapsis> sn2 = new ArrayList<>();
-		sn2.add(n2s);
-		n1.setConexiones(sn1);
-		n2.setConexiones(sn2);
-		
-		System.out.println("Vemos las neuronas de nuevo");
-		System.out.println(n1);
-		System.out.println(n2);
-		System.out.println(s);
-		System.out.println(" ");
-		
-		n1.getConexiones().get(0).setPeso(2);
-		n2s.setPeso(9);
-		System.out.println("Vemos las sinapsis tras un cambio");
-		System.out.println(n1s);
-		System.out.println(n2s);
-		System.out.println("Sinapsis de N1: " + n1.getConexiones().get(0));
-		System.out.println("Sinapsis de N2: " + n2.getConexiones().get(0));
-		System.out.println(" ");
-		
-		
-		
-		System.out.println(" ------------- HASTA AQUI PERFECTO ----------------");
-		System.out.println(" ");
-		Neurona neurona1 = new Neurona(n1);
-		Neurona neurona2 = new Neurona(n2);
-		Neurona salida = new Neurona(s);
-		System.out.println("Vemos las NUEVAS neuronas");
-		System.out.println("n1: "+n1);
-		System.out.println("n2: "+n2);
-		System.out.println("s: "+s);
-		System.out.println("neurona1: "+neurona1);
-		System.out.println("neurona2: "+neurona2);
-		System.out.println("salida: "+salida);
-		System.out.println(" ");
-		
-		neurona2.setName("NEuroNA2");
-		neurona1.setUmbral(5);
-		System.out.println("Vemos las NUEVAS neuronas de nuevo");
-		System.out.println("n1: "+n1);
-		System.out.println("n2: "+n2);
-		System.out.println("s: "+s);
-		System.out.println("neurona1: "+neurona1);
-		System.out.println("neurona2: "+neurona2);
-		System.out.println("salida: "+salida);
-		System.out.println(" ");
-		//Perfecto no necesito cloneable, pues asi no se modifican
-		
-		
-		
-		
+		System.out.println("\n---------------------------------------------------------- ");
+		System.out.println("MOSTRAMOS TODAS LA VARIABLES(ver si se han modificado");
+		System.out.println("Sinepsia o3s: "+o3s);
+		System.out.println("Sinepsia o2s(Mod por red1) "+o2s);//C1(oculta), N1(Oculta2), S0(salida)
+		System.out.println("Sinepsia e1o1(Mod por red2) "+e1o1);//C0(entrada), N0(entrada1), S0(e1o1)
+		System.out.println("Nuerona o2(Mod por red1) "+o2);//C1(oculta), N1(Oculta2)
+		System.out.println("Nuerona e1(Mod por red2) "+e1);//C0(entrada), N0(entrada1)
+		System.out.println("Capa oculta1(Mod por red1) "+CO1);//C1(oculta)
+		System.out.println("Capa entrada(Mod por red2) "+CE);//C0(entrada)
 	}
 		
 
