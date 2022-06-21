@@ -79,18 +79,14 @@ public class Piloto extends Thread{
 			initStr = initStr + " " + angles[i];
 		}
 		initStr = initStr + ")";
-		//System.out.println("Build init string");
 		long curEpisode = 0;
 		boolean shutdownOccurred = false;
-		//System.out.println("Primero DO");
 		do {
 			
 
 			/*
 			 * Client identification
 			 */
-			
-			//System.out.println("Segundo DO");
 			do {
 				System.out.println("Piloto "+this.name+" --> Intentando entrar en el puerto "+(3001+this.name));
 				mySocket.send(initStr);
@@ -107,7 +103,8 @@ public class Piloto extends Thread{
 				 * Receives from TORCS the game state
 				 */
 				inMsg = mySocket.receive(UDP_TIMEOUT);
-				//System.out.println("state game: " + inMsg);
+				System.out.println("Piloto "+this.name+" --> state game: " + inMsg);
+				
 
 				if (inMsg != null) {
 
@@ -139,9 +136,11 @@ public class Piloto extends Thread{
 
 					currStep++;
 					mySocket.send(action.toString());
+					System.out.println("\n-------------------------------");
 				} else
 					System.out.println("Piloto "+this.name+" --> Server did not respond within the timeout");
 			}
+			
 
 		} while (++curEpisode < maxEpisodes && !shutdownOccurred);
 

@@ -22,7 +22,7 @@ public class Client_Hilos {
 	//public static int a = 0;
 	
 	public static void main(String[] args) {
-		/*
+		
 		System.out.println("-----------------------------------");
 		System.out.println("\t\tEMPEZAMOS CARRERA");
 		System.out.println("-----------------------------------");
@@ -41,7 +41,7 @@ public class Client_Hilos {
 		//*/
 		
 		
-		double factor_aprendizaje = 0.1;
+		/*double factor_aprendizaje = 0.1;
 		FuncionActivacion FSigmoide = new Sigmoide();
 		//Disseño red
 		//Conexiones
@@ -108,9 +108,9 @@ public class Client_Hilos {
 		perceptron.add(CS);
 		// */
 		
-		RedNeuronal red1 = new RedNeuronal(perceptron, FSigmoide, factor_aprendizaje);
+		/*RedNeuronal red1 = new RedNeuronal(perceptron, FSigmoide, factor_aprendizaje);
 		//RedNeuronal red2 = new RedNeuronal(perceptron, FSigmoide, factor_aprendizaje);	//HAy que pasarle una copia
-		/*RedNeuronal red2 = (RedNeuronal)red1.clone();
+		RedNeuronal red2 = (RedNeuronal)red1.clone();
 		System.out.println(" ");
 		System.out.println("------------------ Redes ----------------------");
 		System.out.println(red1);
@@ -138,12 +138,12 @@ public class Client_Hilos {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}//*/
-		Fichero f = new Fichero();
+		/*Fichero f = new Fichero();
 		String dir = "C:\\Users\\jesus\\OneDrive\\Escritorio\\TFG_Coche\\TFG\\TORCS_game\\Archivos";
-		String name = "Red1";//*/
+		String name = "Red1";
 		RedNeuronal red3 = f.Cargar(dir, name);
 		System.out.println("\n\n\n");
-		System.out.println(red3);
+		System.out.println(red3);//*/
 	}
 		
 
