@@ -6,6 +6,7 @@ package champ2011client;
 import java.util.ArrayList;
 
 import ChampionJesus2022.Capa;
+import ChampionJesus2022.Fichero;
 import ChampionJesus2022.FuncionActivacion;
 import ChampionJesus2022.Neurona;
 import ChampionJesus2022.RedNeuronal;
@@ -109,7 +110,7 @@ public class Client_Hilos {
 		
 		RedNeuronal red1 = new RedNeuronal(perceptron, FSigmoide, factor_aprendizaje);
 		//RedNeuronal red2 = new RedNeuronal(perceptron, FSigmoide, factor_aprendizaje);	//HAy que pasarle una copia
-		RedNeuronal red2 = (RedNeuronal)red1.clone();
+		/*RedNeuronal red2 = (RedNeuronal)red1.clone();
 		System.out.println(" ");
 		System.out.println("------------------ Redes ----------------------");
 		System.out.println(red1);
@@ -124,15 +125,25 @@ public class Client_Hilos {
 		System.out.println("\n\tRed2");
 		System.out.println(red2);
 		
-		System.out.println("\n---------------------------------------------------------- ");
-		System.out.println("MOSTRAMOS TODAS LA VARIABLES(ver si se han modificado");
-		System.out.println("Sinepsia o3s: "+o3s);
-		System.out.println("Sinepsia o2s(Mod por red1) "+o2s);//C1(oculta), N1(Oculta2), S0(salida)
-		System.out.println("Sinepsia e1o1(Mod por red2) "+e1o1);//C0(entrada), N0(entrada1), S0(e1o1)
-		System.out.println("Nuerona o2(Mod por red1) "+o2);//C1(oculta), N1(Oculta2)
-		System.out.println("Nuerona e1(Mod por red2) "+e1);//C0(entrada), N0(entrada1)
-		System.out.println("Capa oculta1(Mod por red1) "+CO1);//C1(oculta)
-		System.out.println("Capa entrada(Mod por red2) "+CE);//C0(entrada)
+		
+		System.out.println("\n\n---------------------Guardar y leer archivo ---------------");
+		Fichero f = new Fichero();
+		String dir = "C:\\Users\\jesus\\OneDrive\\Escritorio\\TFG_Coche\\TFG\\TORCS_game\\Archivos";
+		String name = "Red1";
+		f.Guardar(dir, name, red1.toString());
+		
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}//*/
+		Fichero f = new Fichero();
+		String dir = "C:\\Users\\jesus\\OneDrive\\Escritorio\\TFG_Coche\\TFG\\TORCS_game\\Archivos";
+		String name = "Red1";//*/
+		RedNeuronal red3 = f.Cargar(dir, name);
+		System.out.println("\n\n\n");
+		System.out.println(red3);
 	}
 		
 

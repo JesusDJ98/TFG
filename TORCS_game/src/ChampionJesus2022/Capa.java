@@ -97,19 +97,19 @@ public class Capa implements Cloneable {
 	
 	@Override
 	public String toString() {
-		String s = "Capa " + this.name+" [\n\t[";
+		String s = "Capa " + this.name+" [\n\tPesos [\n\t";
 		ArrayList<Double> umbrales = new ArrayList<>();
 		//Recorremos los pesos
 		if(this.Neuronas.size() > 1) {
 			for(int i = 0; i < this.Neuronas.size(); i++) {
 				umbrales.add(this.Neuronas.get(i).getUmbral());
 				if(i == 0) s += this.Neuronas.get(i) +"\n";
-				else if(i == this.Neuronas.size()-1) s += "\t"+ this.Neuronas.get(i) +"\n\t], umbrales [";	//La primera va seguida
+				else if(i == this.Neuronas.size()-1) s += "\t"+ this.Neuronas.get(i) +"\n\t],\n\tUmbrales [";	//La primera va seguida
 				else s += "\t" + this.Neuronas.get(i) +"\n";		//Las demas tienen una separacion
 				
 			}
 		}else {
-			s += this.Neuronas.get(0)+"\n\t], umbrales [";
+			s += this.Neuronas.get(0)+"\n\t],\n\tUmbrales [";
 			umbrales.add(this.Neuronas.get(0).getUmbral());
 		}
 		//Recorremos los umbrales

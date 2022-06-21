@@ -18,13 +18,40 @@ public class RedNeuronal implements Cloneable {
 	private ArrayList<ArrayList<Double>> sigmas;	//Podria estar en neurona o capa, pero creo que aqui mejor
 	private FuncionActivacion funcAct;
 	
-	public RedNeuronal(ArrayList<Capa> red, FuncionActivacion act, double factor_aprendizaje) {
-		this.Capas = new ArrayList<>();
+	public RedNeuronal(ArrayList<Capa> red) {
+		/*this.Capas = new ArrayList<>();
 		for(Capa c: red) {
 			Capas.add(new Capa(c));
-		}
+		}*/
+		this.Capas = red;
+		this.alfa = 0;
+		this.funcAct = null;
+	}
+	
+	public RedNeuronal(ArrayList<Capa> red, double factor_aprendizaje) {
+		/*this.Capas = new ArrayList<>();
+		for(Capa c: red) {
+			Capas.add(new Capa(c));
+		}*/
+		this.Capas = red;
+		this.alfa = factor_aprendizaje;
+		this.funcAct = null;
+	}
+	
+	public RedNeuronal(ArrayList<Capa> red, FuncionActivacion act, double factor_aprendizaje) {
+		/*this.Capas = new ArrayList<>();
+		for(Capa c: red) {
+			Capas.add(new Capa(c));
+		}*/
+		this.Capas = red;
 		this.alfa = factor_aprendizaje;
 		this.funcAct = act;
+	}
+	public RedNeuronal(RedNeuronal r) {
+		RedNeuronal aux = (RedNeuronal) r.clone();
+		this.Capas = aux.getCapas();
+		this.alfa = aux.getAlfa();
+		this.funcAct = aux.getFuncAct();
 	}
 	
 	public ArrayList<Double> predict(ArrayList<Double> entrada) {
@@ -36,6 +63,8 @@ public class RedNeuronal implements Cloneable {
 		}
 		return salida;
 	}
+	
+	
 	
 	/*
 	 * ERROR CUADRATICO 
@@ -159,17 +188,40 @@ public class RedNeuronal implements Cloneable {
 	}
 	
 	
+	public ArrayList<Capa> getCapas() {
+		return Capas;
+	}
+
+	public void setCapas(ArrayList<Capa> capas) {
+		Capas = capas;
+	}
+
+	public double getAlfa() {
+		return alfa;
+	}
+
+	public void setAlfa(double alfa) {
+		this.alfa = alfa;
+	}
+
+	public ArrayList<ArrayList<Double>> getSigmas() {
+		return sigmas;
+	}
+
+	public void setSigmas(ArrayList<ArrayList<Double>> sigmas) {
+		this.sigmas = sigmas;
+	}
+
+	public FuncionActivacion getFuncAct() {
+		return funcAct;
+	}
+
+	public void setFuncAct(FuncionActivacion funcAct) {
+		this.funcAct = funcAct;
+	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	@Override
 	public Object clone() {
 		//System.out.println("Entro en clone de RedNeuronal");
