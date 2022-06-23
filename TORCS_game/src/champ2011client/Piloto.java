@@ -6,6 +6,7 @@ package champ2011client;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import ChampionJesus2022.ManualDriver;
 import champ2011client.Controller.Stage;
 
 /**
@@ -66,9 +67,11 @@ public class Piloto extends Thread{
 		SocketHandler mySocket = new SocketHandler(host, port, verbose);
 		String inMsg;
 		
-		//Controller driver = load(args[0]);//*/
+		//Controller driver = load(args[0]);
 		//Controller driver = new SimpleDriver();
-		Controller driver = new JesusDriver();
+		//Controller driver = new JesusDriver();
+		Controller driver = new RandomDriver();
+		//Controller driver = new ManualDriver();	//No funciona como quiero
 		driver.setStage(stage);
 		driver.setTrackName(trackName);
 		

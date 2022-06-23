@@ -4,6 +4,7 @@
 package champ2011client;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import ChampionJesus2022.Capa;
 import ChampionJesus2022.Fichero;
@@ -12,6 +13,7 @@ import ChampionJesus2022.Neurona;
 import ChampionJesus2022.RedNeuronal;
 import ChampionJesus2022.Sigmoide;
 import ChampionJesus2022.Sinapsis;
+import ChampionJesus2022.Teclado;
 
 /**
  * @author Daniele Loiacono
@@ -22,6 +24,8 @@ public class Client_Hilos {
 	//public static int a = 0;
 	
 	public static void main(String[] args) {
+		
+		
 		
 		System.out.println("-----------------------------------");
 		System.out.println("\t\tEMPEZAMOS CARRERA");
