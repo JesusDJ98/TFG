@@ -13,7 +13,6 @@ import ChampionJesus2022.Neurona;
 import ChampionJesus2022.RedNeuronal;
 import ChampionJesus2022.Sigmoide;
 import ChampionJesus2022.Sinapsis;
-import ChampionJesus2022.Teclado;
 
 /**
  * @author Daniele Loiacono
@@ -35,7 +34,7 @@ public class Client_Hilos {
 		int a = 0;	//Para que se conecten en orden
 		System.out.println("Conectamos pilotos");
 		Piloto piloto1 = new Piloto(0, args, a);
-		Piloto piloto2 = new Piloto(1, args, a);
+		//Piloto piloto2 = new Piloto(1, args, a);
 		//Piloto piloto3 = new Piloto(2, args);
 		//Piloto piloto4 = new Piloto(3, args);
 		
@@ -45,7 +44,26 @@ public class Client_Hilos {
 		//*/
 		
 		
-		/*double factor_aprendizaje = 0.1;
+//		if(fin) {
+//			System.out.println("GUARDO");
+//			String dir = "C:\\Users\\jesus\\OneDrive\\Escritorio\\TFG_Coche\\TFG\\TORCS_game\\Archivos";
+//			String name = "Salida_Ejecucion";
+//			ArrayList<String> reci = piloto1.getRecibidos();
+//			ArrayList<String> send = piloto1.getEnviados();
+//			String info = "";
+//			int tama = send.size();
+//			if(reci.size() > send.size()) {
+//				tama =reci.size();
+//			}
+//			for(int i = 0; i < tama; i++) {
+//				info += "Recibido: "+reci.get(i)+"\n";
+//				info += "Enviado: "+send.get(i)+"\n\n--------------------\n";
+//			}
+//			Fichero f = new Fichero();
+//			f.Guardar(dir, name, info);
+//		}
+		/*
+		double factor_aprendizaje = 0.1;
 		FuncionActivacion FSigmoide = new Sigmoide();
 		//Disseño red
 		//Conexiones
@@ -112,24 +130,37 @@ public class Client_Hilos {
 		perceptron.add(CS);
 		// */
 		
-		/*RedNeuronal red1 = new RedNeuronal(perceptron, FSigmoide, factor_aprendizaje);
+		/*RedNeuronal red1 = new RedNeuronal("Prueba",perceptron, FSigmoide, factor_aprendizaje);
 		//RedNeuronal red2 = new RedNeuronal(perceptron, FSigmoide, factor_aprendizaje);	//HAy que pasarle una copia
-		RedNeuronal red2 = (RedNeuronal)red1.clone();
+		RedNeuronal red2 = new RedNeuronal(red1);
+		red2.setNombre("Prueba2");
 		System.out.println(" ");
 		System.out.println("------------------ Redes ----------------------");
 		System.out.println(red1);
 		System.out.println("\n\tRed2");
 		System.out.println(red2);
-		red1.Modificar_PesoNeurona(1, 1, 0, 8);
+		/*red1.Modificar_PesoNeurona(1, 1, 0, 8);
 		red2.Modificar_PesoNeurona(0, 0, 0, 9);
 		o3s.setPeso(10);//Modifico una sinapsis	--> No afecta
 		System.out.println(" ");
 		System.out.println("----- CAMBIO -----");
 		System.out.println(red1);
 		System.out.println("\n\tRed2");
-		System.out.println(red2);
+		System.out.println(red2);//*/
+		/*ArrayList<Neurona> todasN = red1.getNeuronas();
+		todasN.get(3).setUmbral(0.1);
+		ArrayList<Sinapsis> todasS = red2.getConexiones();
+		todasS.get(5).setPeso(2);
+		System.out.println(" ");
+		System.out.println("----- CAMBIO -----");
+		System.out.println(red1);
+		System.out.println("\n\tRed2");
+		System.out.println(red2);//*/
 		
 		
+		
+		
+		/*
 		System.out.println("\n\n---------------------Guardar y leer archivo ---------------");
 		Fichero f = new Fichero();
 		String dir = "C:\\Users\\jesus\\OneDrive\\Escritorio\\TFG_Coche\\TFG\\TORCS_game\\Archivos";
@@ -145,8 +176,17 @@ public class Client_Hilos {
 		/*Fichero f = new Fichero();
 		String dir = "C:\\Users\\jesus\\OneDrive\\Escritorio\\TFG_Coche\\TFG\\TORCS_game\\Archivos";
 		String name = "Red1";
-		RedNeuronal red3 = f.Cargar(dir, name);
-		System.out.println("\n\n\n");
+		//RedNeuronal red3 = f.Cargar(dir, name);
+		System.out.println("\n\n---------------------------------------------------\n\n");
+		
+		ArrayList<RedNeuronal> redes = f.CargarRedes(dir, name);
+		String s = "";
+		for(RedNeuronal r: redes) {
+			s += r.toString() + "\n";
+			//System.out.println(r);
+		}
+		System.out.println(s);
+		/*System.out.println("\n\n\n");
 		System.out.println(red3);//*/
 	}
 		

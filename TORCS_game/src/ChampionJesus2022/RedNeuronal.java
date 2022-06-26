@@ -12,43 +12,36 @@ import java.util.ArrayList;
 
 public class RedNeuronal implements Cloneable {
 	
+	String nombre;
 	private ArrayList<Capa> Capas;
 	private double alfa;
 	//private ArrayList<double[][]> deltas;	//Creo que lo puedo introducir en sinapsis
 	private ArrayList<ArrayList<Double>> sigmas;	//Podria estar en neurona o capa, pero creo que aqui mejor
 	private FuncionActivacion funcAct;
 	
-	public RedNeuronal(ArrayList<Capa> red) {
-		/*this.Capas = new ArrayList<>();
-		for(Capa c: red) {
-			Capas.add(new Capa(c));
-		}*/
+	public RedNeuronal(String nombre, ArrayList<Capa> red) {
+		this.nombre = nombre;
 		this.Capas = red;
 		this.alfa = 0;
 		this.funcAct = null;
 	}
 	
-	public RedNeuronal(ArrayList<Capa> red, double factor_aprendizaje) {
-		/*this.Capas = new ArrayList<>();
-		for(Capa c: red) {
-			Capas.add(new Capa(c));
-		}*/
+	public RedNeuronal(String nombre, ArrayList<Capa> red, double factor_aprendizaje) {
+		this.nombre = nombre;
 		this.Capas = red;
 		this.alfa = factor_aprendizaje;
 		this.funcAct = null;
 	}
 	
-	public RedNeuronal(ArrayList<Capa> red, FuncionActivacion act, double factor_aprendizaje) {
-		/*this.Capas = new ArrayList<>();
-		for(Capa c: red) {
-			Capas.add(new Capa(c));
-		}*/
+	public RedNeuronal(String nombre, ArrayList<Capa> red, FuncionActivacion act, double factor_aprendizaje) {
+		this.nombre = nombre;
 		this.Capas = red;
 		this.alfa = factor_aprendizaje;
 		this.funcAct = act;
 	}
 	public RedNeuronal(RedNeuronal r) {
 		RedNeuronal aux = (RedNeuronal) r.clone();
+		this.nombre = aux.getNombre();
 		this.Capas = aux.getCapas();
 		this.alfa = aux.getAlfa();
 		this.funcAct = aux.getFuncAct();
@@ -180,12 +173,10 @@ public class RedNeuronal implements Cloneable {
 	
 	
 	
-	
+	/*
 	public void Modificar_PesoNeurona(int iCapa, int iNeurona, int iconexion, double p) {
-		//System.out.println("Quiero acceder a Capa "+iCapa+" Neurona "+iNeurona+" Conexion "+iconexion);
-		//System.out.println("ModRed--> Tengo "+this.Capas.size()+" capas");
 		this.Capas.get(iCapa).Modificar_PesoNeurona(iNeurona, iconexion, p);
-	}
+	}//*/
 	
 	
 	public ArrayList<Capa> getCapas() {
@@ -220,6 +211,40 @@ public class RedNeuronal implements Cloneable {
 		this.funcAct = funcAct;
 	}
 	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	public ArrayList<Neurona> getNeuronas(){
+		ArrayList<Neurona> listaN = new ArrayList<>();
+		for(Capa c: this.Capas) {
+			for(Neurona n: c.getNeuronas()) {
+				listaN.add(n);
+			}
+		}
+		
+		return listaN;
+	}
+	
+	public ArrayList<Sinapsis> getConexiones(){
+		ArrayList<Sinapsis> listaS = new ArrayList<>();
+		for(Capa c: this.Capas) {
+			for(Neurona n: c.getNeuronas()) {
+				for(Sinapsis s: n.getConexiones()) {
+					listaS.add(s);
+				}
+			}
+		}
+		
+		return listaS;
+	}
+	
+	
+
 	
 
 	@Override
@@ -244,10 +269,11 @@ public class RedNeuronal implements Cloneable {
 	
 	@Override
 	public String toString() {
-		String s = "";
+		String s = "Red "+this.nombre+" {\n";
 		for(Capa c: this.Capas) {
 			s += c+"\n";
 		}
+		s += "}";
 		
 		return s;
 	}

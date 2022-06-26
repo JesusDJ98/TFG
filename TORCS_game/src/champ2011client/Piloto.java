@@ -6,7 +6,7 @@ package champ2011client;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-import ChampionJesus2022.ManualDriver;
+import ChampionJesus2022.Fichero;
 import champ2011client.Controller.Stage;
 
 /**
@@ -28,9 +28,14 @@ public class Piloto extends Thread{
 	private String[] args;
 	private int name;
 	public static int a;
-	public static ArrayList lista;
+	
+	ArrayList<String> recibidos;
+	ArrayList<String> enviados;
 	
 	public Piloto(int numero, String[] arg, int ab) {
+		this.enviados = new ArrayList<>();
+		this.recibidos = new ArrayList<>();
+		
 		this.args = arg;
 		this.name = numero;
 		a = ab;
@@ -69,8 +74,8 @@ public class Piloto extends Thread{
 		
 		//Controller driver = load(args[0]);
 		//Controller driver = new SimpleDriver();
-		//Controller driver = new JesusDriver();
-		Controller driver = new RandomDriver();
+		Controller driver = new JesusDriver();
+		//Controller driver = new RandomDriver();
 		//Controller driver = new ManualDriver();	//No funciona como quiero
 		driver.setStage(stage);
 		driver.setTrackName(trackName);
@@ -106,6 +111,7 @@ public class Piloto extends Thread{
 				 * Receives from TORCS the game state
 				 */
 				inMsg = mySocket.receive(UDP_TIMEOUT);
+				this.recibidos.add(inMsg);
 				System.out.println("Piloto "+this.name+" --> state game: " + inMsg);
 				
 
@@ -139,6 +145,7 @@ public class Piloto extends Thread{
 
 					currStep++;
 					mySocket.send(action.toString());
+					this.enviados.add(action.toString());
 					System.out.println("\n-------------------------------");
 				} else
 					System.out.println("Piloto "+this.name+" --> Server did not respond within the timeout");
@@ -150,6 +157,22 @@ public class Piloto extends Thread{
 		/*
 		 * Shutdown the controller
 		 */
+		System.out.println("GUARDO");
+		String dir = "C:\\Users\\jesus\\OneDrive\\Escritorio\\TFG_Coche\\TFG\\TORCS_game\\Archivos";
+		String name = "Salida_Ejecucion";
+		ArrayList<String> reci = this.recibidos;
+		ArrayList<String> send = this.enviados;
+		String info = "";
+		int tama = send.size();
+		if(reci.size() > send.size()) {
+			tama =reci.size();
+		}
+		for(int i = 0; i < tama-1; i++) {
+			info += "Recibido: "+reci.get(i)+"\n";
+			info += "Enviado: "+send.get(i)+"\n\n--------------------\n";
+		}
+		Fichero f = new Fichero();
+		f.Guardar(dir, name, info);
 		driver.shutdown();
 		mySocket.close();
 		System.out.println("Piloto "+this.name+" --> Client shutdown.");
@@ -243,4 +266,24 @@ public class Piloto extends Thread{
 		}
 		return controller;
 	}
+
+	public ArrayList<String> getRecibidos() {
+		return recibidos;
+	}
+
+	public void setRecibidos(ArrayList<String> recibidos) {
+		this.recibidos = recibidos;
+	}
+
+	public ArrayList<String> getEnviados() {
+		return enviados;
+	}
+
+	public void setEnviados(ArrayList<String> enviados) {
+		this.enviados = enviados;
+	}
+	
+	
+	
+	
 }

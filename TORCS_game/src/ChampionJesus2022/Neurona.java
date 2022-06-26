@@ -77,11 +77,12 @@ public class Neurona implements Cloneable{
 		this.conexiones = conexiones;
 	}
 	
+	/*
 	//Jugar
 	public void changePeso(int indice, double p) {
 		//System.out.println("\t\tModNeurona--> Tengo "+this.conexiones.size()+" conexiones, Accedo a "+this.conexiones.get(indice));
 		this.conexiones.get(indice).setPeso(p);
-	}
+	}//*/
 	
 	
 	

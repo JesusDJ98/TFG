@@ -39,11 +39,11 @@ public class Capa implements Cloneable {
 		return salida;
 	}
 	
-	
+	/*
 	public void Modificar_PesoNeurona(int iNeurona, int iconexion, double p) {
 		//System.out.println("\tModCapa--> Tengo "+this.Neuronas.size()+" neuronas, Accedo a "+this.Neuronas.get(iNeurona));
 		this.Neuronas.get(iNeurona).changePeso(iconexion, p);
-	}
+	}//*/
 	
 	
 	
